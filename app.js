@@ -70,7 +70,7 @@ app.post("/login", async (req, res) => {
   if (!USER) {
     return res.send({ data: "User dosent Exist" });
   }
-  if (bcrypt.compare(password, USER.password)) {
+  if (await bcrypt.compare(password, USER.password)) {
     const token = jwt.sign({ email: USER.email }, JWT_SECRET);
     if (res.status(201)) {
       return res.send({ status: "ok", data: USER, tokan: token });
